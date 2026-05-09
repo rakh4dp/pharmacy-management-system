@@ -31,7 +31,7 @@ const Transaction = {
 
     findAll: async () => {
         const sql = `
-            SELECT t.*, u.username as kasir 
+            SELECT t.*, u.username as processed_by 
             FROM transactions t 
             JOIN users u ON t.user_id = u.id 
             ORDER BY t.transaction_date DESC

@@ -13,7 +13,7 @@ const pool = mysql.createPool({
 
 pool.getConnection()
     .then(conn => {
-        console.log('Database Connected to XAMPP MySQL');
+        console.log('Database Connected to MySQL');
         conn.release();
     })
     .catch(err => {

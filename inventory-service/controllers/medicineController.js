@@ -47,7 +47,12 @@ const medicineController = {
             }
 
             await Medicine.update(id, { name, price, stock, category_id });
-            res.status(200).json({ message: "Data obat berhasil diperbarui!" });
+
+            const updatedMedicine = await Medicine.findById(id);
+            res.status(200).json({ 
+                message: "Data obat berhasil diperbarui!",
+                data: updatedMedicine
+            });
         } catch (error) {
             res.status(500).json({ message: "Gagal memperbarui obat." });
         }
@@ -98,10 +103,21 @@ const medicineController = {
             }
 
             await Medicine.patch(id, fieldsToUpdate);
+
+            const updatedMedicine = await Medicine.findById(id);
+
+            const changes = {};
+            Object.keys(fieldsToUpdate).forEach(key => {
+                changes[key] = {
+                    before: existing[key],
+                    after: updatedMedicine[key]
+                };
+            });
             
             res.status(200).json({ 
                 message: "Data obat berhasil diperbarui sebagian!",
-                updatedFields: Object.keys(fieldsToUpdate)
+                updatedFields: Object.keys(fieldsToUpdate),
+                changes: changes
             });
         } catch (error) {
             console.error(error);

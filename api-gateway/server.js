@@ -19,12 +19,21 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.use('/api/auth', proxy(process.env.AUTH_SERVICE_URL));
+app.use('/api/auth', proxy(process.env.AUTH_SERVICE_URL, {
+    proxyReqPathResolver: req => req.originalUrl 
+}));
 
-app.use('/api/categories', proxy(process.env.INVENTORY_SERVICE_URL));
-app.use('/api/medicines', proxy(process.env.INVENTORY_SERVICE_URL));
+app.use('/api/categories', proxy(process.env.INVENTORY_SERVICE_URL, {
+    proxyReqPathResolver: req => req.originalUrl
+}));
 
-app.use('/api/transactions', proxy(process.env.TRANSACTION_SERVICE_URL));
+app.use('/api/medicines', proxy(process.env.INVENTORY_SERVICE_URL, {
+    proxyReqPathResolver: req => req.originalUrl
+}));
+
+app.use('/api/transactions', proxy(process.env.TRANSACTION_SERVICE_URL, {
+    proxyReqPathResolver: req => req.originalUrl
+}));
 
 app.get('/', (req, res) => {
     res.send('API Gateway Apotek is Running');
@@ -33,5 +42,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 4072;
 app.listen(PORT, () => {
     console.log(`API GATEWAY jalan di port: ${PORT}`);
-    console.log(`Semua request harus lewat pintu ini!`);
+    console.log(`Link: http://localhost:${PORT}`);
 });
