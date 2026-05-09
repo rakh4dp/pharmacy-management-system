@@ -1,0 +1,32 @@
+{
+  "name": "pertemuan9-backend",
+  "version": "1.0.0",
+  "description": "Backend sistem manajemen apotek yang dibangun menggunakan arsitektur microservice dengan Node.js. Sistem ini mencakup autentikasi berbasis JWT, manajemen inventaris obat, pemrosesan transaksi, komunikasi asinkron menggunakan RabbitMQ, dan satu titik akses terpusat melalui API Gateway.",
+  "main": "ecosystem.RakhaDwiPrayoga.config.js",
+  "workspaces": [
+    "auth-service",
+    "inventory-service",
+    "transaction-service",
+    "message-worker",
+    "api-gateway"
+  ],
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "install:all": "npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakh4dp/pharmacy-management-system.git"
+  },
+  "keywords": [],
+  "author": "Rakha Dwi Prayoga",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rakh4dp/pharmacy-management-system/issues"
+  },
+  "homepage": "https://github.com/rakh4dp/pharmacy-management-system#readme"
+}
