@@ -13,7 +13,8 @@ const sendToQueue = async (message) => {
             persistent: true 
         });
 
-        console.log(`Pesan dikirim ke broker:`, message);
+        const itemsSummary = message.items.map(item => `${item.quantity} ${item.medicine_name}`).join(', ');
+        console.log(`[Broker] Sent: Order #${message.transactionId} for ${message.customer_name} (${itemsSummary})`);
 
         setTimeout(() => {
             connection.close();
